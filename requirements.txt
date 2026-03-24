@@ -1,0 +1,20 @@
+streamlit
+python-dotenv
+psycopg2-binary
+
+# LangChain
+langchain
+langchain-groq
+langchain-pinecone
+langchain-huggingface
+langgraph
+
+# Vector DB & Embeddings
+pinecone
+sentence-transformers
+
+# Groq
+groq
+
+# AWS
+boto3
