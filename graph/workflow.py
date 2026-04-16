@@ -1,6 +1,12 @@
 """
 graph/workflow.py
 Compiled LangGraph workflow for Memoria.
+
+Pipeline: resolve → guard → retrieve → generate
+- resolve:  LLM 1 (combined — identifies profile + relevant nodes in one call)
+- guard:    SQL  (recursive relationship check, no LLM)
+- retrieve: DB   (fetches full block content, no LLM)
+- generate: LLM 2 (composes final response)
 """
 
 from langgraph.graph import StateGraph, END

@@ -56,16 +56,16 @@ if user_input:
 
             # Build initial LangGraph state
             initial_state = {
-                "user_id":          LOGGED_IN_USER_ID,
-                "user_message":     user_input,
-                "messages":         st.session_state.messages[:-1],
+                "user_id":           LOGGED_IN_USER_ID,
+                "user_message":      user_input,
+                "messages":          st.session_state.messages[:-1],
                 "resolved_profiles": st.session_state.resolved_profiles,
-                "allowed_profiles": [],
-                "denied_messages":  [],
+                "allowed_profiles":  [],
+                "denied_messages":   [],
                 "retrieved_context": "",
-                "media_items":      [],
-                "wants_media":      False,
-                "response":         "",
+                "media_items":       [],
+                "wants_media":       False,
+                "response":          "",
             }
 
             # Run the LangGraph workflow

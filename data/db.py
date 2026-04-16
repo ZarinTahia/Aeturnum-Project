@@ -51,36 +51,6 @@ def get_profile(profile_id: str):
     return dict(row) if row else None
 
 
-def get_connected_profiles(user_id: str):
-    """Return all profiles this user is CONNECTED to."""
-    user = get_user(user_id)
-    if not user:
-        return []
-
-    my_profile_id = user["current_profile_id"]
-
-    conn = get_connection()
-    cur = conn.cursor(cursor_factory=RealDictCursor)
-    cur.execute("""
-        SELECT r.type, r.custom_label, p.*
-        FROM relationships r
-        JOIN profiles p ON p.id = r.to_profile_id
-        WHERE r.from_profile_id = %s AND r.status = 'connected'
-    """, (my_profile_id,))
-    rows = cur.fetchall()
-    cur.close()
-    conn.close()
-
-    result = []
-    for row in rows:
-        row = dict(row)
-        result.append({
-            "profile": {k: v for k, v in row.items() if k not in ("type", "custom_label")},
-            "relationship_type": row["type"],
-            "custom_label": row["custom_label"],
-        })
-    return result
-
 
 # ─────────────────────────────────────────────
 # RELATIONSHIPS
@@ -203,6 +173,7 @@ def check_relationship(user_id: str, target_profile_id: str):
 # ─────────────────────────────────────────────
 # NODES & BLOCKS
 # ─────────────────────────────────────────────
+
 
 def get_nodes_for_profile(profile_id: str):
     conn = get_connection()
